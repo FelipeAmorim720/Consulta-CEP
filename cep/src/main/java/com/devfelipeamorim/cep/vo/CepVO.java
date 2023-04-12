@@ -20,4 +20,7 @@ public class CepVO {
         return cep;
     }
 
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 }
