@@ -1,4 +1,4 @@
-package com.example.address;
+package com.devfelipeamorim.address;
 
 import com.devfelipeamorim.cep.controllers.AddressController;
 import com.devfelipeamorim.cep.exceptions.AddressErrorException;

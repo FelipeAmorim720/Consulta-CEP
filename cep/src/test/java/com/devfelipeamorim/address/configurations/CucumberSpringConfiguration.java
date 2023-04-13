@@ -1,4 +1,4 @@
-package com.example.address.configurations;
+package com.devfelipeamorim.address.configurations;
 
 import com.devfelipeamorim.cep.CepApplication;
 import io.cucumber.spring.CucumberContextConfiguration;
