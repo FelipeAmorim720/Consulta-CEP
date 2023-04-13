@@ -1,4 +1,4 @@
-package com.devfelipeamorim.cep.vo;
+package com.devfelipeamorim.cep.models;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 import static com.devfelipeamorim.cep.utils.Constants.CEP_DESCRIPTION;
 import static com.devfelipeamorim.cep.utils.Constants.CEP_EXAMPLE;
 
-public class CepVO {
+public class Cep {
 
     @NotNull
     @NotBlank

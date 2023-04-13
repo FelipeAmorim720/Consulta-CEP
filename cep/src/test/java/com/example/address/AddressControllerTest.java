@@ -1,7 +1,9 @@
-import com.devfelipeamorim.cep.controller.AddressController;
+package com.example.address;
+
+import com.devfelipeamorim.cep.controllers.AddressController;
 import com.devfelipeamorim.cep.exceptions.AddressErrorException;
-import com.devfelipeamorim.cep.service.AddressService;
-import com.devfelipeamorim.cep.vo.CepVO;
+import com.devfelipeamorim.cep.services.AddressService;
+import com.devfelipeamorim.cep.models.Cep;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,8 +28,8 @@ public class AddressControllerTest {
     @Test
     @DisplayName("Testing return of address with valid CEP")
     public void testReturnAddressWithValidCep() throws AddressErrorException {
-        // Dado um CepVO válido
-        CepVO cep = new CepVO();
+        // Dado um Cep válido
+        Cep cep = new Cep();
         cep.setCep("01001000");
 
         // Configuração do comportamento do AddressService mock
@@ -43,8 +45,8 @@ public class AddressControllerTest {
     @Test
     @DisplayName("Testing return of address with invalid CEP")
     public void testReturnAddressWithNotFoundCep() throws AddressErrorException {
-        // Dado um CepVO inválido
-        CepVO cep = new CepVO();
+        // Dado um Cep inválido
+        Cep cep = new Cep();
         cep.setCep("12345-678");
 
         // Configuração do comportamento do AddressService mock
@@ -60,8 +62,8 @@ public class AddressControllerTest {
     @Test
     @DisplayName("Testing return of address with Internal Server Error")
     public void testReturnAddressWithInternalServerError() throws AddressErrorException {
-        // Dado um CepVO qualquer
-        CepVO cep = new CepVO();
+        // Dado um Cep qualquer
+        Cep cep = new Cep();
         cep.setCep("08320810");
 
         // Configuração do comportamento do AddressService mock para retornar HttpStatus.INTERNAL_SERVER_ERROR

@@ -1,16 +1,17 @@
-package com.devfelipeamorim.cep.service;
+package com.devfelipeamorim.cep.services;
 
 import com.devfelipeamorim.cep.enums.Region;
 import com.devfelipeamorim.cep.exceptions.AddressErrorException;
 import com.devfelipeamorim.cep.exceptions.NotFoundException;
-import com.devfelipeamorim.cep.model.Address;
-import com.devfelipeamorim.cep.vo.CepVO;
+import com.devfelipeamorim.cep.models.Address;
+import com.devfelipeamorim.cep.models.Cep;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import static com.devfelipeamorim.cep.utils.Constants.*;
@@ -24,10 +25,10 @@ public class AddressService {
 
     Gson gson = new Gson();
 
-    public ResponseEntity searchAddressByCep(CepVO cep) throws AddressErrorException {
-
+    public ResponseEntity searchAddressByCep(Cep cep) throws AddressErrorException {
+        validateCep(cep);
         String url = HOST_API + cep.getCep() + PARAMETER_API;
-        ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, String.class, cep);
+        ResponseEntity<String> responseEntity = callExternalApi(url);
 
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             Address address = gson.fromJson(responseEntity.getBody(), Address.class);
@@ -56,6 +57,27 @@ public class AddressService {
             }
         } else {
             return ResponseEntity.status(responseEntity.getStatusCode()).body(CEP_ERROR);
+        }
+    }
+
+    private ResponseEntity callExternalApi(String url) throws AddressErrorException {
+        try {
+            return restTemplate.exchange(url, HttpMethod.GET, null, String.class);
+        } catch (HttpServerErrorException e) {
+            throw new AddressErrorException(CEP_ERROR, e);
+        }
+    }
+
+    public void validateCep(Cep cep) throws AddressErrorException {
+        String cepValue = cep.getCep();
+
+        if (cepValue.length() == 8 && cepValue.contains("-")) {
+            throw new AddressErrorException("CEP inválido: o CEP com 8 caracteres não pode conter traço.");
+        } else if (cepValue.length() == 9) {
+            // Cep com 9 caracteres deve ter traço na sexta posição
+            if (!cepValue.matches("\\d{5}-\\d{3}")) {
+                throw new AddressErrorException("CEP inválido: o CEP com 9 caracteres deve seguir o formato '12345-678'.");
+            }
         }
     }
 

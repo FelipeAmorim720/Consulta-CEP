@@ -1,4 +1,4 @@
-package com.devfelipeamorim.cep.configuration;
+package com.devfelipeamorim.cep.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.devfelipeamorim.cep.model;
+package com.devfelipeamorim.cep.models;
 
 import com.google.gson.annotations.SerializedName;
 import io.swagger.v3.oas.annotations.media.Schema;
