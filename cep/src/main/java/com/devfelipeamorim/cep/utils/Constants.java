@@ -24,7 +24,7 @@ public class Constants {
     public static final String LOGRADOURO = "logradouro";
     public static final String STREET_EXAMPLE = "Haddock Lobo";
     public static final String STREET_DESCRIPTION = "Nome da rua";
-    public static final String COMPLEMENT_EXAMPLE = "Apto";
+    public static final String COMPLEMENT_EXAMPLE = "até 1048 - lado par";
     public static final String COMPLEMENT_DESCRIPTION = "Complemento";
     public static final String DISTRICT_EXAMPLE = "Cerqueira César";
     public static final String DISTRICT_DESCRIPTION = "Bairro";
@@ -41,4 +41,7 @@ public class Constants {
     public static final String PARAMETER_API = "/json/";
 
     public static final String SUCCESS_FALSE = "false";
+
+    public static final String CEP_FORMAT = "CEP inválido: o CEP com 9 caracteres deve seguir o formato '12345-678'.";
+    public static final String CEP_CARACTER = "CEP inválido: o CEP com 8 caracteres não pode conter traço.";
 }

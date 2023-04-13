@@ -20,13 +20,13 @@ public class Address {
 
 
     @Given("a valid Cep")
-    public void givenValidCepVO() {
+    public void givenValidCep() {
         cep = new Cep();
         cep.setCep("01001000");
     }
 
     @Given("an invalid Cep")
-    public void givenInvalidCepVO() {
+    public void givenInvalidCep() {
         cep = new Cep();
         cep.setCep("12345-678");
     }

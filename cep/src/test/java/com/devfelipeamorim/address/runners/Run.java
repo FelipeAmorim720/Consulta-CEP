@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @CucumberOptions(
         features = {"src/test/java/com/devfelipeamorim/address/features"},
         glue = {"com.devfelipeamorim.address.steps", "com.devfelipeamorim.address.configurations"},
-        monochrome = true
+        monochrome = true,
+        plugin = "pretty"
 )
 @SpringBootTest
 public class Run extends AbstractTestNGCucumberTests {

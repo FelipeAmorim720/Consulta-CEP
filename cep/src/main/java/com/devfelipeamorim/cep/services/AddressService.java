@@ -27,8 +27,7 @@ public class AddressService {
 
     public ResponseEntity searchAddressByCep(Cep cep) throws AddressErrorException {
         validateCep(cep);
-        String url = HOST_API + cep.getCep() + PARAMETER_API;
-        ResponseEntity<String> responseEntity = callExternalApi(url);
+        ResponseEntity<String> responseEntity = callExternalApi(cep);
 
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             Address address = gson.fromJson(responseEntity.getBody(), Address.class);
@@ -60,7 +59,9 @@ public class AddressService {
         }
     }
 
-    private ResponseEntity callExternalApi(String url) throws AddressErrorException {
+    private ResponseEntity callExternalApi(Cep cep) throws AddressErrorException {
+        String url = HOST_API + cep.getCep() + PARAMETER_API;
+
         try {
             return restTemplate.exchange(url, HttpMethod.GET, null, String.class);
         } catch (HttpServerErrorException e) {
@@ -71,12 +72,13 @@ public class AddressService {
     public void validateCep(Cep cep) throws AddressErrorException {
         String cepValue = cep.getCep();
 
+        // Cep com 8 caracteres não deve ter traço
         if (cepValue.length() == 8 && cepValue.contains("-")) {
-            throw new AddressErrorException("CEP inválido: o CEP com 8 caracteres não pode conter traço.");
+            throw new AddressErrorException(CEP_CARACTER);
         } else if (cepValue.length() == 9) {
             // Cep com 9 caracteres deve ter traço na sexta posição
             if (!cepValue.matches("\\d{5}-\\d{3}")) {
-                throw new AddressErrorException("CEP inválido: o CEP com 9 caracteres deve seguir o formato '12345-678'.");
+                throw new AddressErrorException(CEP_FORMAT);
             }
         }
     }
