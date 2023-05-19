@@ -17,7 +17,6 @@ public class Constants {
     public static final String CEP_ERROR = "Erro ao buscar endereço por CEP";
 
     public static final String NOT_FOUND_EXCEPTION_DESCRIPTION = "Exceção para representar erro de CEP não encontrado";
-    public static final String INTERNAL_EXCEPTION_DESCRIPTION = "Exceção para representar erros de servidor interno";
 
     public static final String CEP_EXAMPLE = "01414-000";
     public static final String CEP_DESCRIPTION = "CEP";
